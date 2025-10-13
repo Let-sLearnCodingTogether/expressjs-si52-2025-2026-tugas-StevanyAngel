@@ -42,17 +42,14 @@ exports.createApplication = async (req, res) => {
 // @access  Private
 exports.getApplications = async (req, res) => {
   try {
-    // Query parameters untuk filter
     const { status, companyName } = req.query;
 
     let query = { user: req.user._id };
 
-    // Filter berdasarkan status jika ada
     if (status) {
       query.status = status;
     }
 
-    // Filter berdasarkan nama perusahaan jika ada
     if (companyName) {
       query.companyName = { $regex: companyName, $options: "i" };
     }
@@ -86,7 +83,6 @@ exports.getApplication = async (req, res) => {
       });
     }
 
-    // Pastikan user hanya bisa akses lamaran miliknya sendiri
     if (application.user.toString() !== req.user._id.toString()) {
       return res.status(403).json({
         success: false,
@@ -120,7 +116,6 @@ exports.updateApplication = async (req, res) => {
       });
     }
 
-    // Pastikan user hanya bisa update lamaran miliknya sendiri
     if (application.user.toString() !== req.user._id.toString()) {
       return res.status(403).json({
         success: false,
@@ -160,7 +155,6 @@ exports.deleteApplication = async (req, res) => {
       });
     }
 
-    // Pastikan user hanya bisa hapus lamaran miliknya sendiri
     if (application.user.toString() !== req.user._id.toString()) {
       return res.status(403).json({
         success: false,
