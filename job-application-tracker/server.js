@@ -25,8 +25,8 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Routes
-app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/api/applications", require("./routes/applicationRoutes"));
+app.use("/api/auth", require("./routes/authRoutes.js"));
+app.use("/api/applications", require("./routes/applicationRoutes.js"));
 
 // Root route
 app.get("/", (req, res) => {
